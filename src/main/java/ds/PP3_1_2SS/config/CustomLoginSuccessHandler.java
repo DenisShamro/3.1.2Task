@@ -15,19 +15,18 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
-        // Логика обработки успешного входа
-        String targetUrl = determineTargetUrl(authentication); // Определение URL для редиректа
-        response.sendRedirect(targetUrl); // Редирект пользователя
+
+        String targetUrl = determineTargetUrl(authentication);
+        response.sendRedirect(targetUrl);
     }
 
     private String determineTargetUrl(Authentication authentication) {
-        // Логика определения редиректа
-        // Пример: перенаправление на разные страницы в зависимости от роли
+
         if (authentication.getAuthorities().stream()
                 .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN"))) {
-            return "/admin"; // Если роль ADMIN
+            return "/admin";
         } else {
-            return "/user"; // Если другие роли
+            return "/user";
         }
     }
 }

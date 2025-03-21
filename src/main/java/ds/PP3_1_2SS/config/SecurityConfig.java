@@ -26,8 +26,6 @@ public class SecurityConfig {
                         .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest()
                         .authenticated())
-//                .logout(logout -> logout
-//                        .logoutSuccessUrl("/login"))
                         .formLogin()
                 .successHandler(new CustomLoginSuccessHandler());
 

@@ -26,7 +26,7 @@
   <input type="password"  id="password" name="password"   th:value="${user.password}" autocomplete="new-password"  required><br>
 
   <label>Роли:</label><br/>
-  <div th:each="role : ${roles}">
+  <div th:each="role : ${roles}" >
     <input type="checkbox"
            th:name="roleIds"
            th:value="${role.id}"/>

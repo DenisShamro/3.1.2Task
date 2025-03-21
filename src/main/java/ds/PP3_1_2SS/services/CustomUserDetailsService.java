@@ -26,7 +26,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
+
     public CustomUserDetailsService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -46,7 +46,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                         user.getRoles().stream().
                                 map(role -> new SimpleGrantedAuthority(role.getAuthority())).
                                 collect(Collectors.toSet()))).
-                orElseThrow(() -> new UsernameNotFoundException("email not found"));
+                orElseThrow(() -> new UsernameNotFoundException("email  not found"));
 
     }
 
@@ -72,7 +72,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Transactional
     public void updateUser( User updatedUser) {
-//        updatedUser.setId(id);
+        updatedUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
         userRepository.save(updatedUser);
     }
 }
